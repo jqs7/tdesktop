@@ -300,11 +300,7 @@ INCLUDEPATH += "/usr/include/atk-1.0"
 INCLUDEPATH += "/usr/include/dee-1.0"
 INCLUDEPATH += "/usr/include/libdbusmenu-glib-0.4"
 
-INCLUDEPATH += "/usr/lib/glib-2.0/include"
-INCLUDEPATH += "/usr/lib/gtk-2.0/include"
-INCLUDEPATH += "/usr/include/opus"
-
-LIBS += -lcrypto -lssl -lz -ldl -llzma -lexif -lopus -lopusfile -logg -lopenal
+LIBS += -lcrypto -lssl -lz -ldl -llzma -lexif -lopenal -lavformat -lavcodec -lswresample -lavutil -lopus
 LIBS += ./../../../Libraries/QtStatic/qtbase/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.a
 LIBS += ./../../../Libraries/QtStatic/qtbase/plugins/platforminputcontexts/libibusplatforminputcontextplugin.a
 LIBS += ./../../../Libraries/QtStatic/qtbase/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.a
