@@ -17,16 +17,19 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 */
 "lng_language_name" = "简体中文";
 "lng_switch_to_this" = "切换为简体中文";
+
 "lng_menu_contacts" = "联系人";
 "lng_menu_settings" = "设置";
 "lng_menu_about" = "关于";
 "lng_menu_update" = "更新";
 "lng_menu_restart" = "重新开始";
 "lng_menu_back" = "后退";
+
 "lng_open_from_tray" = "打开 Telegram";
 "lng_minimize_to_tray" = "最小化到托盘";
 "lng_quit_from_tray" = "退出 Telegram";
 "lng_tray_icon_text" = "Telegram 仍在运行，\n可以从设置页面进行更改。\n如果该图标从托盘菜单消失，\n你可以将其从隐藏的图标拖回到这里。";
+
 "lng_month1" = "一月";
 "lng_month2" = "二月";
 "lng_month3" = "三月";
@@ -39,6 +42,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_month10" = "十月";
 "lng_month11" = "十一月";
 "lng_month12" = "十二月";
+
 "lng_weekday1" = "周一";
 "lng_weekday2" = "周二";
 "lng_weekday3" = "周三";
@@ -46,6 +50,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_weekday5" = "周五";
 "lng_weekday6" = "周六";
 "lng_weekday7" = "周日";
+
 "lng_weekday1_full" = "星期一";
 "lng_weekday2_full" = "星期二";
 "lng_weekday3_full" = "星期三";
@@ -53,13 +58,16 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_weekday5_full" = "星期五";
 "lng_weekday6_full" = "星期六";
 "lng_weekday7_full" = "星期天";
+
 "lng_month_day" = "{month} {day}";
+
 "lng_cancel" = "取消";
 "lng_continue" = "继续";
 "lng_close" = "关闭";
-"lng_connecting" = "连接..";
+"lng_connecting" = "连接中..";
 "lng_reconnecting" = "重新连接 {count:now|in # s|in # s}..";
 "lng_reconnecting_try_now" = "立即试用";
+
 "lng_status_service_notifications" = "服务通知";
 "lng_status_offline" = "最后上线很久以前";
 "lng_status_recently" = "近期最后上线";
@@ -75,18 +83,23 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_status_lastseen_date_time" = "最后登录：{date} 的 {time}";
 "lng_status_online" = "在线";
 "lng_status_connecting" = "连接中..";
+
 "lng_chat_status_unaccessible" = "组不可访问";
 "lng_chat_status_members" = "{count:no members|# 个成员|# 个成员}";
 "lng_chat_status_members_online" = "{count:_not_used_|# 个成员|# 个成员}, {count_online:_not_used_|# 在线|# 在线}";
+
 "lng_server_error" = "内部服务器错误。";
 "lng_flood_error" = "尝试次数过多。请稍后再试。";
 "lng_deleted" = "未知";
 "lng_deleted_message" = "删除的邮件";
+
 "lng_intro" = "欢迎使用官方 [a href=\"https://telegram.org/\"]Telegram[/a] 桌面软件。\n[b]fast[/b] 又 [b]secure[/b]。";
 "lng_start_msgs" = "START MESSAGING";
+
 "lng_intro_next" = "下一个";
 "lng_intro_finish" = "注册";
 "lng_intro_submit" = "提交";
+
 "lng_phone_ph" = "你的电话号码";
 "lng_phone_title" = "联系电话";
 "lng_phone_desc" = "请确认您的国家代码，并输入您的电话号码。";
@@ -97,17 +110,21 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_country_done" = "完成";
 "lng_country_none" = "未找到相应国家";
 "lng_country_select" = "选择国家";
+
 "lng_code_ph" = "您的代码";
 "lng_code_desc" = "我们已经发送激活码到您的手机。请在下面输入。";
 "lng_code_call" = "Telegram 将会在 {minutes}:{seconds} 后呼叫您的手机";
 "lng_code_calling" = "请求 Telegram 呼叫..";
 "lng_code_called" = "Telegram 已经呼叫了您的电话";
+
 "lng_bad_phone" = "电话号码无效。请重试。";
 "lng_bad_phone_noreg" = "电话号码没有注册。";
 "lng_bad_code" = "您输入的代码无效。请重试。";
 "lng_bad_name" = "请输入您的姓氏和名字。";
 "lng_bad_photo" = "选择的图像无效。";
+
 "lng_bad_image_for_photo" = "无法直接发送图像。\n你想它作为一个文件发送？";
+
 "lng_signin_title" = "云密码检查";
 "lng_signin_desc" = "请输入您的云密码。";
 "lng_signin_recover_desc" = "请输入从电子邮件获得的代码。";
@@ -125,20 +142,25 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_signin_reset_account" = "重置您的帐户";
 "lng_sigin_sure_reset" = "警告!\n\n所有的聊天记录和媒体，\n以及共享的文件都会丢失！\n\n确定重置账户？";
 "lng_sigin_reset" = "重置";
+
 "lng_signup_title" = "信息和照片";
 "lng_signup_desc" = "请输入您的姓名和上传照片。";
+
 "lng_signup_firstname" = "名";
 "lng_signup_lastname" = "姓";
+
 "lng_dlg_filter" = "搜索";
 "lng_dlg_new_group_name" = "群组名称";
 "lng_dlg_create_group" = "创建";
 "lng_no_contacts" = "没有联系人";
 "lng_contacts_loading" = "载入中..";
 "lng_contacts_not_found" = "没有找到联系人";
+
 "lng_settings_save" = "保存";
 "lng_settings_upload" = "设置头像";
 "lng_settings_crop_profile" = "为您的个人资料照片选择正方形区域";
 "lng_settings_uploading_photo" = "上传照片......";
+
 "lng_username_title" = "更改用户名";
 "lng_username_about" = "您可以为自己在 Telegram 上设置一个用户名，\n这样其它用户就算不知道你的手机号也可以与\n你聊天。\n\n用户名只能包含 a-z、0-9 和下划线，至少为 5\n个字符。";
 "lng_username_invalid" = "此名称无效..";
@@ -147,16 +169,20 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_username_bad_symbols" = "此名称存在无效符号。";
 "lng_username_available" = "此名称可用。";
 "lng_username_not_found" = "用户  @{user}  没有找到。";
+
 "lng_settings_section_contact_info" = "联系信息";
 "lng_settings_phone_number" = "电话号码：";
 "lng_settings_username" = "用户名：";
 "lng_settings_choose_username" = "选择用户名";
+
 "lng_settings_section_notify" = "通知";
 "lng_settings_desktop_notify" = "桌面通知";
 "lng_settings_show_name" = "显示发件人的名称";
 "lng_settings_show_preview" = "显示消息预览";
 "lng_settings_sound_notify" = "播放声音";
+
 "lng_notification_preview" = "你有新消息";
+
 "lng_settings_section_general" = "常规";
 "lng_settings_change_lang" = "更改语言";
 "lng_languages" = "语言";
@@ -177,6 +203,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_settings_add_sendto" = "将 Telegram 添加到 «Send to» 菜单";
 "lng_settings_scale_label" = "界面缩放";
 "lng_settings_scale_auto" = "自动 ({cur})";
+
 "lng_settings_section_chat" = "聊天选项";
 "lng_settings_replace_emojis" = "更换 emoji";
 "lng_settings_view_emojis" = "查看列表";
@@ -184,11 +211,14 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_settings_send_enter" = "按回车键发送";
 "lng_settings_send_ctrlenter" = "按 Ctrl + Enter 键发送";
 "lng_settings_send_cmdenter" = "按 Cmd+Enter 键发送";
+
 "lng_settings_section_background" = "聊天背景";
 "lng_settings_bg_from_gallery" = "从图库选择";
 "lng_settings_bg_from_file" = "从文件选择";
 "lng_settings_bg_tile" = "平铺背景";
+
 "lng_backgrounds_header" = "选择新的聊天背景";
+
 "lng_download_path_dont_ask" = "不再询问下载路径";
 "lng_download_path_label" = "下载路径：";
 "lng_download_path_temp" = "临时文件夹";
@@ -206,6 +236,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_download_path_clearing" = "清理..";
 "lng_download_path_cleared" = "已清理！";
 "lng_download_path_clear_failed" = "清理失败:(";
+
 "lng_settings_section_cache" = "本地存储";
 "lng_settings_no_data_cached" = "没有找到缓存数据！";
 "lng_settings_images_cached" = "{count:_not_used_|# image|# images}, {size}";
@@ -214,8 +245,11 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_local_storage_clearing" = "清理..";
 "lng_local_storage_cleared" = "已清理！";
 "lng_local_storage_clear_failed" = "清理失败:(";
+
 "lng_settings_section_advanced" = "高级";
+
 "lng_passcode_remove_button" = "移除";
+
 "lng_passcode_turn_on" = "启用本地密码";
 "lng_passcode_change" = "更改密码的本地";
 "lng_passcode_create" = "创建本地密码";
@@ -237,6 +271,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_passcode_enter" = "请输入您的本地密码";
 "lng_passcode_submit" = "提交";
 "lng_passcode_logout" = "注销";
+
 "lng_cloud_password_waiting" = "确认链接已发送到 {email}..";
 "lng_cloud_password_change" = "更改密码云";
 "lng_cloud_password_create" = "创建云的密码";
@@ -260,6 +295,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_cloud_password_differ" = "密码不匹配";
 "lng_cloud_password_wrong" = "云密码错误";
 "lng_cloud_password_is_same" = "未更改密码";
+
 "lng_connection_type" = "连接方式：";
 "lng_connection_auto_connecting" = "默认（连接..）";
 "lng_connection_auto" = "Default ({type} used)";
@@ -282,15 +318,19 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_settings_reset_done" = "其它会话已终止";
 "lng_settings_logout" = "注销";
 "lng_sure_logout" = "您确定要退出？";
+
 "lng_settings_need_restart" = "重启才能使新的设置生效，确定立即重启？";
 "lng_settings_restart_now" = "重新开始";
 "lng_settings_restart_later" = "稍后";
+
 "lng_sessions_header" = "当前会话";
 "lng_sessions_other_header" = "活动的会话";
 "lng_sessions_no_other" = "没有其它会话";
 "lng_sessions_other_desc" = "你可以从多终端登录 Telegram 且所有终端的信息都会实时同步。";
 "lng_sessions_terminate_all" = "终止所有";
+
 "lng_preview_loading" = "获取链接信息..";
+
 "lng_profile_chat_unaccessible" = "群组不可访问";
 "lng_topbar_info" = "信息";
 "lng_profile_settings_section" = "设置";
@@ -322,40 +362,84 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_profile_audios_header" = "语音信息概览";
 "lng_profile_show_all_types" = "显示所有类型";
 "lng_profile_copy_phone" = "复制手机号";
+
 "lng_participant_filter" = "搜索";
 "lng_participant_invite" = "邀请";
 "lng_create_new_group" = "新群组";
 "lng_create_group_next" = "下一个";
 "lng_create_group_title" = "新群组";
+
 "lng_failed_add_participant" = "无法添加用户。请稍后再试。";
+
 "lng_sure_delete_contact" = "确定从联系人列表删除 {contact}？";
 "lng_sure_delete_history" = "Are you sure, you want to delete all message history with {contact}?\n\nThis action cannot be undone.";
+
 "lng_sure_delete_and_exit" = "Are you sure, you want to delete all message history and leave «{group}»?\n\nThis action cannot be undone.";
+
 "lng_message_empty" = "（空）";
+
 "lng_action_add_user" = "{from} 将 {user} 加入群组";
 "lng_action_kick_user" = "{from} 将 {user} 移出群组";
 "lng_action_user_left" = "{from} 离开了群组";
 "lng_action_user_joined" = "{from} 加入群组";
+"lng_action_user_joined_by_link" = "{from} 使用邀请链接加入了群组";
 "lng_action_user_registered" = "{from} 刚刚加入 Telegram";
 "lng_action_removed_photo" = "{from} 删除了群组图片";
 "lng_action_changed_photo" = "{from} 更改了群组图片";
 "lng_action_changed_title" = "{from} 将群组名称更改为 «{title}»";
 "lng_action_created_chat" = "{from} 建立了 «{title}» 群组";
+
+"lng_group_invite_bad_link" = "链接已失效";
+"lng_group_invite_want_join" = "确定加入群组 «{title}» 吗?";
+"lng_group_invite_join" = "加入";
+
+"lng_group_invite_link" = "邀请链接";
+"lng_group_invite_create" = "创建邀请链接";
+"lng_group_invite_about" = "使用邀请链接就能直接加入群组";
+"lng_group_invite_create_new" = "创建邀请链接";
+"lng_group_invite_about_new" = "将重新生成一个新的邀请链接，现有的将会失效";
+"lng_group_invite_copied" = "邀请链接已复制到剪切板";
+"lng_group_invite_no_room" = "群组成员已满，无法加入";
+
 "lng_forwarded_from" = "转发于";
 "lng_in_reply_to" = "In reply to";
+
 "lng_attach_failed" = "失败";
 "lng_attach_file" = "文件";
 "lng_attach_photo" = "照片";
+
 "lng_media_type" = "媒体类型";
 "lng_media_type_photos" = "照片";
 "lng_media_type_videos" = "视频文件";
 "lng_media_type_files" = "文件";
 "lng_media_type_audios" = "语音消息";
+
 "lng_media_open_with" = "打开方式";
 "lng_media_download" = "下载";
 "lng_media_cancel" = "取消";
 "lng_media_video" = "视频文件";
 "lng_media_audio" = "语音消息";
+
+"lng_emoji_category0" = "最近使用";
+"lng_emoji_category1" = "People";
+"lng_emoji_category2" = "Nature";
+"lng_emoji_category3" = "Food & Drink";
+"lng_emoji_category4" = "Celebration";
+"lng_emoji_category5" = "Activity";
+"lng_emoji_category6" = "Travel & Places";
+"lng_emoji_category7" = "Objects & Symbols";
+
+"lng_switch_stickers" = "Stickers";
+"lng_switch_emoji" = "Emoji";
+
+"lng_custom_stickers" = "Stickers 定制";
+"lng_stickers_remove_pack" = "删除 «{sticker_pack}»?";
+"lng_stickers_add_pack" = "添加 {count:_not_used_|# Sticker|# Stickers}";
+"lng_stickers_share_pack" = "分享 Stickers";
+"lng_stickers_not_found" = "Sticker 未找到";
+"lng_stickers_copied" = "Sticker 链接已复制到剪切板";
+"lng_stickers_default_set" = "Great Minds";
+
 "lng_in_dlg_photo" = "照片";
 "lng_in_dlg_video" = "视频";
 "lng_in_dlg_contact" = "联系人";
@@ -363,17 +447,21 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_in_dlg_file" = "文件";
 "lng_in_dlg_sticker" = "标签";
 "lng_in_dlg_sticker_emoji" = "{emoji} (sticker)";
+
 "lng_send_button" = "发送";
 "lng_message_ph" = "写一个消息..";
+"lng_record_cancel" = "在此区域外释放取消录音";
 "lng_empty_history" = "";
 "lng_willbe_history" = "Please select chat to start messaging";
 "lng_message_with_from" = "[c]{from}:[/c] {message}";
 "lng_from_you" = "你";
+
 "lng_typing" = "正在输入";
 "lng_user_typing" = "{user} 正在输入";
 "lng_users_typing" = "{user} 和 {second_user} 正在输入";
 "lng_many_typing" = "{count:_not_used_|# 正在|# 正在}输入";
 "lng_unread_bar" = "{count:_not_used_|# 未读消息|# 未读消息}";
+
 "lng_maps_point" = "地点";
 "lng_save_photo" = "保存图像";
 "lng_save_video" = "保存视频";
@@ -382,6 +470,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_save_downloaded" = "{ready} / {total} {mb}";
 "lng_duration_and_size" = "{duration}, {size}";
 "lng_choose_images" = "选择图片";
+
 "lng_context_open_link" = "打开链接";
 "lng_context_copy_link" = "复制链接";
 "lng_context_open_email" = "Write to this address";
@@ -403,6 +492,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_context_save_video" = "视频另存为...";
 "lng_context_open_audio" = "打开音频";
 "lng_context_save_audio" = "音频另存为..";
+"lng_context_pack_info" = "贴图包信息";
 "lng_context_open_file" = "打开文件";
 "lng_context_save_file" = "文件另存为..";
 "lng_context_forward_file" = "转发文件";
@@ -423,6 +513,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_really_send_file" = "发送此文件？";
 "lng_really_share_contact" = "分享此联系人？";
 "lng_send_image_compressed" = "发送压缩的图像";
+
 "lng_forward_choose" = "选择收件人..";
 "lng_forward_confirm" = "转发给 {recipient}？";
 "lng_forward_share_contact" = "将联系人分享给 {recipient}？";
@@ -433,6 +524,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_forward_messages" = "{count:_not_used_|转发消息|# 转发消息}";
 "lng_forwarding_from" = "{user} 和 {count:_not_used_|# 其它|# 其它}";
 "lng_forwarding_from_two" = "{user} and {second_user}";
+
 "lng_contact_phone" = "电话号码";
 "lng_enter_contact_data" = "新建联系人";
 "lng_edit_group_title" = "编辑群组名";
@@ -445,12 +537,15 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_contact_not_joined" = "{name} 还没有加入 Telegram，你可以发送邀请给他。\n\n当你的联系人加入 Telegram 我们将会发出提醒。";
 "lng_try_other_contact" = "尝试其他";
 "lng_contacts_done" = "取消";
+
 "lng_drag_images_here" = "拖放图片到此处";
 "lng_drag_photos_here" = "拖放照片到此处";
 "lng_drag_files_here" = "拖放文件到此处";
+
 "lng_drag_to_send_quick" = "发送（快速）";
 "lng_drag_to_send_no_compression" = "发送（不压缩）";
 "lng_drag_to_send_files" = "发送（以文件形式）";
+
 "lng_selected_clear" = "取消";
 "lng_selected_delete" = "删除";
 "lng_selected_forward" = "前进";
@@ -459,11 +554,14 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_selected_delete_sure_this" = "删除这条私信？";
 "lng_selected_delete_sure" = "确定删除 {count:_not_used_|# 消息|# 消息}?";
 "lng_selected_delete_confirm" = "删除";
+
 "lng_about_version" = "版本号 {version}";
 "lng_about_text" = "官方基于 [a href=\"https://core.telegram.org/mtproto\"]MTProto[/a] 和\n[a href=\"https://core.telegram.org/api\"]Telegram API[/a] 开发的免费自由的聊天软件。迅速而安全。\n\n此软件基于[a href=\"https://github.com/telegramdesktop/tdesktop/blob/master/LICENSE\"]GNU GPL[/a] version 3 协议发布，源代码可以在此查看:[a href=\"https://github.com/telegramdesktop/tdesktop\"]GitHub[/a].";
 "lng_about_done" = "完成";
+
 "lng_search_found_results" = "{count:No messages found|Found # message|Found # messages}";
 "lng_search_global_results" = "全局搜索结果";
+
 "lng_media_save_progress" = "{ready} of {total} {mb}";
 "lng_mediaview_save_as" = "另存为..";
 "lng_mediaview_copy" = "复制";
@@ -480,18 +578,33 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_mediaview_today" = "今天 {time}";
 "lng_mediaview_yesterday" = "昨天 {time}";
 "lng_mediaview_date_time" = "{date} 的 {time}";
+
 "lng_mediaview_saved" = "图片已经保存到 [c]Downloads[/c] 目录";
+
 "lng_new_authorization" = "{name},\n我们检测到在 {day}, {date} 的 {time} 你从新的设备登录了 Telegram。\n\n设备: {device}\n位置: {location}\n\n如果不是你在操作，可以在设置中点击显示所有会话，然后将终止不必要的会话。\n\n你也可以开启两步验证。\n\nTelegram 团队";
+
 "lng_new_version_wrap" = "Telegram Desktop 已更新到版本 {version}\n\n{changes}\n\n完整的更新日志：\n{link}";
 "lng_new_version_minor" = "- 错误修复和其他小的改进";
-"lng_new_version_text" = "— 全新的图片浏览器设计\n— 图片浏览器中可以切换文件\n— Grouped notifications when several messages are forwarded\n— 全新的聊天背景（可在设置中更改）";
+"lng_new_version_text" = "— 语音消息\n— 修复Stickers消失的bug";
+
 "lng_menu_insert_unicode" = "插入Unicode控制字符";
+
+// Wnd specific
+
 "lng_wnd_choose_program_menu" = "选择默认程序...";
+
 "lng_wnd_menu_undo" = "撤销";
 "lng_wnd_menu_redo" = "重做";
+
+// Linux specific
+
 "lng_linux_menu_undo" = "撤销";
 "lng_linux_menu_redo" = "重做";
+
+// Mac specific
+
 "lng_mac_choose_program_menu" = "其他...";
+
 "lng_mac_choose_app" = "选择应用程序";
 "lng_mac_choose_text" = "选择一个应用程序来打开文档 \"{file}\"。";
 "lng_mac_enable_filter" = "启用：";
@@ -500,6 +613,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_mac_always_open_with" = "打开方式（总是）";
 "lng_mac_this_app_can_open" = "此应用程序可以打开  \"{file}\"。";
 "lng_mac_not_known_app" = "It's not known if this application can open \"{file}\".";
+
 "lng_mac_menu_services" = "服务";
 "lng_mac_menu_hide_telegram" = "隐藏 {telegram}";
 "lng_mac_menu_hide_others" = "隐藏其他";
