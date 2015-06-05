@@ -316,7 +316,7 @@ OTHER_FILES += \
     Resources/style_classes.txt \
     Resources/style.txt \
     Resources/lang.strings \
-	SourceFiles/langs/lang_zh_CN.strings \
+    SourceFiles/langs/lang_zh_CN.strings \
     SourceFiles/langs/lang_it.strings \
     SourceFiles/langs/lang_es.strings \
     SourceFiles/langs/lang_de.strings \
