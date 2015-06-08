@@ -59,7 +59,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_weekday6_full" = "星期六";
 "lng_weekday7_full" = "星期天";
 
-"lng_month_day" = "{month} {day}";
+"lng_month_day" = "{month} {day} 日";
 
 "lng_cancel" = "取消";
 "lng_continue" = "继续";
@@ -239,8 +239,8 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 
 "lng_settings_section_cache" = "本地存储";
 "lng_settings_no_data_cached" = "没有找到缓存数据！";
-"lng_settings_images_cached" = "{count:_not_used_|# image|# images}, {size}";
-"lng_settings_audios_cached" = "{count:_not_used_|# voice message|# voice messages}, {size}";
+"lng_settings_images_cached" = "{count:_not_used_|# 张图片|# 张图片}, {size}";
+"lng_settings_audios_cached" = "{count:_not_used_|# 条语音消息|# 条语音消息}, {size}";
 "lng_local_storage_clear" = "清除所有";
 "lng_local_storage_clearing" = "清理..";
 "lng_local_storage_cleared" = "已清理！";
@@ -298,11 +298,11 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 
 "lng_connection_type" = "连接方式：";
 "lng_connection_auto_connecting" = "默认（连接..）";
-"lng_connection_auto" = "Default ({type} used)";
+"lng_connection_auto" = "默认 ({type} used)";
 "lng_connection_http_proxy" = "启用代理的 HTTP 连接";
 "lng_connection_tcp_proxy" = "启用代理的 TCP 连接";
 "lng_connection_header" = "连接类型";
-"lng_connection_auto_rb" = "Auto (TCP if available or HTTP)";
+"lng_connection_auto_rb" = "自动 (TCP if available or HTTP)";
 "lng_connection_http_proxy_rb" = "HTTP with custom http-proxy";
 "lng_connection_tcp_proxy_rb" = "TCP with custom socks5-proxy";
 "lng_connection_host_ph" = "主机名";
