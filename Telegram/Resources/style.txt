@@ -986,12 +986,21 @@ btnAttachPhoto: iconedButton(btnAttachDocument) {
 btnAttachEmoji: iconedButton(btnAttachDocument) {
 	overBgColor: white;
 	icon: sprite(363px, 344px, 21px, 22px);
-	iconPos: point(6px, 13px);
+	iconPos: point(6px, 12px);
 	downIcon: sprite(363px, 344px, 21px, 22px);
-	downIconPos: point(6px, 13px);
+	downIconPos: point(6px, 12px);
 
 	width: 33px;
 }
+btnRecordAudio: sprite(363px, 366px, 16px, 24px);
+btnRecordAudioActive: sprite(379px, 366px, 16px, 24px);
+recordSignalColor: #f17077;
+recordSignalMin: 5px;
+recordSignalMax: 10px;
+recordCancel: #aaa;
+recordCancelActive: #ec6466;
+recordFont: font(16px);
+recordTextTop: 12px;
 
 replySkip: 51px;
 replyColor: #377aae;
@@ -1641,6 +1650,13 @@ stickerPanSize: size(55px, 55px);
 stickerPanPadding: 11px;
 stickerPanDelete: sprite(123px, 132px, 12px, 12px);
 stickerPanDeleteOpacity: 0.5;
+stickerIconPadding: 3px;
+stickerIconHover: #e8ecef;
+stickerIconSel: #dfe3e6;
+stickerIconRecent: sprite(342px, 50px, 21px, 22px);
+stickerIconLeft: sprite(342px, 72px, 40px, 1px);
+stickerIconRight: sprite(342px, 73px, 40px, 1px);
+stickerIconMove: 400;
 
 mvBgColor: #222;
 mvBgOpacity: 0.92;
@@ -1717,9 +1733,13 @@ mvDocExtColor: white;
 mvDocExtPadding: 10px;
 mvDocLinksTop: 57px;
 mvDocRed: sprite(0px, 400px, 80px, 80px);
+mvDocRedColor: #e47272;
 mvDocYellow: sprite(80px, 400px, 80px, 80px);
+mvDocYellowColor: #efc274;
 mvDocGreen: sprite(160px, 400px, 80px, 80px);
+mvDocGreenColor: #61b96e;
 mvDocBlue: sprite(240px, 400px, 80px, 80px);
+mvDocBlueColor: #72b1df;
 mvDocLink: linkButton(btnDefLink) {
 	color: #4595d3;
 	overColor: #4595d3;
