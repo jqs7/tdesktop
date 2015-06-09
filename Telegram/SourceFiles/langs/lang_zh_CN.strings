@@ -372,9 +372,9 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_failed_add_participant" = "无法添加用户。请稍后再试。";
 
 "lng_sure_delete_contact" = "确定从联系人列表删除 {contact}？";
-"lng_sure_delete_history" = "Are you sure, you want to delete all message history with {contact}?\n\nThis action cannot be undone.";
+"lng_sure_delete_history" = "确定删除{contact}相关的所有历史记录？\n\n此操作不可恢复";
 
-"lng_sure_delete_and_exit" = "Are you sure, you want to delete all message history and leave «{group}»?\n\nThis action cannot be undone.";
+"lng_sure_delete_and_exit" = "确定退出«{group}»并删除所有相关历史记录？\n\n此操作不可恢复";
 
 "lng_message_empty" = "（空）";
 
