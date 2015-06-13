@@ -77,8 +77,8 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_status_lastseen_now" = "刚刚在线";
 "lng_status_lastseen_minutes" = "最后登录： {count:_not_used_|# minute|# 分钟}之前";
 "lng_status_lastseen_hours" = "最后登录： {count:_not_used_|# hour|# 小时}之前";
-"lng_status_lastseen_today" = "最后登录：今天 {time} 点";
-"lng_status_lastseen_yesterday" = "最后登录：昨天 {time} 点";
+"lng_status_lastseen_today" = "最后登录：今天 {time} ";
+"lng_status_lastseen_yesterday" = "最后登录：昨天 {time} ";
 "lng_status_lastseen_date" = "最后登录：{date}";
 "lng_status_lastseen_date_time" = "最后登录：{date} 的 {time}";
 "lng_status_online" = "在线";
@@ -352,13 +352,13 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_profile_loading" = "载入中..";
 "lng_profile_shared_media" = "共享媒体";
 "lng_profile_no_media" = "此次交谈中没有多媒体。";
-"lng_profile_photos" = "{count:_not_used_|# photo|# photos} »";
-"lng_profile_photos_header" = "照片概览";
-"lng_profile_videos" = "{count:_not_used_|# video file|# video files} »";
+"lng_profile_photos" = "{count:_not_used_|# 张图片|# 张图片} »";
+"lng_profile_photos_header" = "图片概览";
+"lng_profile_videos" = "{count:_not_used_|# 个视频|# 个视频} »";
 "lng_profile_videos_header" = "视频文件概览";
-"lng_profile_files" = "{count:_not_used_|# file|# files} »";
+"lng_profile_files" = "{count:_not_used_|# 个文件|# 个文件} »";
 "lng_profile_files_header" = "文件概览";
-"lng_profile_audios" = "{count:_not_used_|# 语音信息|# 语音信息} »";
+"lng_profile_audios" = "{count:_not_used_|# 条语音信息|# 条语音信息} »";
 "lng_profile_audios_header" = "语音信息概览";
 "lng_profile_show_all_types" = "显示所有类型";
 "lng_profile_copy_phone" = "复制手机号";
@@ -372,9 +372,9 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_failed_add_participant" = "无法添加用户。请稍后再试。";
 
 "lng_sure_delete_contact" = "确定从联系人列表删除 {contact}？";
-"lng_sure_delete_history" = "确定删除{contact}相关的所有历史记录？\n\n此操作不可恢复";
+"lng_sure_delete_history" = "确定删除 {contact} 相关的所有历史记录？\n\n此操作不可恢复";
 
-"lng_sure_delete_and_exit" = "确定退出«{group}»并删除所有相关历史记录？\n\n此操作不可恢复";
+"lng_sure_delete_and_exit" = "确定退出 «{group}» 并删除所有相关历史记录？\n\n此操作不可恢复";
 
 "lng_message_empty" = "（空）";
 
