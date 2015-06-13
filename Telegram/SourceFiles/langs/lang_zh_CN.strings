@@ -66,7 +66,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_close" = "关闭";
 "lng_connecting" = "连接中..";
 "lng_reconnecting" = "重新连接 {count:now|in # s|in # s}..";
-"lng_reconnecting_try_now" = "立即试用";
+"lng_reconnecting_try_now" = "立即使用";
 
 "lng_status_service_notifications" = "服务通知";
 "lng_status_offline" = "最后上线很久以前";
@@ -342,7 +342,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_profile_enable_notifications" = "通知";
 "lng_profile_clear_history" = "清除历史记录";
 "lng_profile_send_message" = "发送消息";
-"lng_profile_share_contact" = "风险联系人";
+"lng_profile_share_contact" = "分享联系人";
 "lng_profile_delete_contact" = "删除";
 "lng_profile_set_group_photo" = "设置照片";
 "lng_profile_add_participant" = "添加成员";
