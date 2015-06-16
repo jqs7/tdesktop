@@ -501,9 +501,9 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_context_copy_text" = "复制文本";
 "lng_context_to_msg" = "转至留言";
 "lng_context_reply_msg" = "回复";
-"lng_context_forward_msg" = "转发邮件";
-"lng_context_delete_msg" = "删除留言";
-"lng_context_select_msg" = "选择信息";
+"lng_context_forward_msg" = "转发消息";
+"lng_context_delete_msg" = "删除消息";
+"lng_context_select_msg" = "选择消息";
 "lng_context_cancel_upload" = "取消上传";
 "lng_context_copy_selected" = "复制选定的文本";
 "lng_context_forward_selected" = "转发所选";
