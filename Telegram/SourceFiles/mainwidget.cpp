@@ -494,9 +494,13 @@ void MainWidget::finishForwarding(History *hist) {
 		if (_toForward.size() < 2) {
 			uint64 randomId = MTP::nonce<uint64>();
 			MsgId newId = clientMsgId();
-			hist->addToBackForwarded(newId, static_cast<HistoryMessage*>(_toForward.cbegin().value()));
+			HistoryMessage *msg = static_cast<HistoryMessage*>(_toForward.cbegin().value());
+			hist->addToBackForwarded(newId, msg);
 			App::historyRegRandom(randomId, newId);
 			hist->sendRequestId = MTP::send(MTPmessages_ForwardMessage(hist->peer->input, MTP_int(_toForward.cbegin().key()), MTP_long(randomId)), rpcDone(&MainWidget::sentUpdatesReceived), RPCFailHandlerPtr(), 0, 0, hist->sendRequestId);
+			if (HistorySticker *sticker = dynamic_cast<HistorySticker*>(msg->getMedia())) {
+				App::main()->incrementSticker(sticker->document());
+			}
 		} else {
 			QVector<MTPint> ids;
 			QVector<MTPlong> randomIds;
@@ -762,19 +766,21 @@ void MainWidget::removeContact(UserData *user) {
 
 void MainWidget::addParticipants(ChatData *chat, const QVector<UserData*> &users) {
 	for (QVector<UserData*>::const_iterator i = users.cbegin(), e = users.cend(); i != e; ++i) {
-		MTP::send(MTPmessages_AddChatUser(MTP_int(chat->id & 0xFFFFFFFF), (*i)->inputUser, MTP_int(ForwardOnAdd)), rpcDone(&MainWidget::sentUpdatesReceived), rpcFail(&MainWidget::addParticipantFail, chat), 0, 5);
+		MTP::send(MTPmessages_AddChatUser(MTP_int(chat->id & 0xFFFFFFFF), (*i)->inputUser, MTP_int(ForwardOnAdd)), rpcDone(&MainWidget::sentUpdatesReceived), rpcFail(&MainWidget::addParticipantFail, *i), 0, 5);
 	}
 	App::wnd()->hideLayer();
 	showPeer(chat->id, 0, false);
 }
 
-bool MainWidget::addParticipantFail(ChatData *chat, const RPCError &error) {
+bool MainWidget::addParticipantFail(UserData *user, const RPCError &error) {
 	if (error.type().startsWith(qsl("FLOOD_WAIT_"))) return false;
 
-	ConfirmBox *box = new ConfirmBox(lang(lng_failed_add_participant), true);
-	App::wnd()->showLayer(box);
+	QString text = lang(lng_failed_add_participant);
 	if (error.type() == "USER_LEFT_CHAT") { // trying to return banned user to his group
+	} else if (error.type() == "USER_ALREADY_PARTICIPANT" && user->botInfo) {
+		text = lang(lng_bot_already_in_group);
 	}
+	App::wnd()->showLayer(new ConfirmBox(text, true));
 	return false;
 }
 
@@ -817,7 +823,7 @@ void MainWidget::checkedHistory(PeerData *peer, const MTPmessages_Messages &resu
 		dialogs.removePeer(peer);
 	} else {
 		History *h = App::historyLoaded(peer->id);
-		if (!h->last) {
+		if (!h->lastMsg) {
 			h->addToBack((*v)[0], 0);
 		}
 	}
@@ -929,6 +935,10 @@ DialogsIndexed &MainWidget::contactsList() {
 	return dialogs.contactsList();
 }
 
+DialogsIndexed &MainWidget::dialogsList() {
+	return dialogs.dialogsList();
+}
+
 void MainWidget::sendPreparedText(History *hist, const QString &text, MsgId replyTo, WebPageId webPageId) {
 	saveRecentHashtags(text);
 	QString sendingText, leftText = text;
@@ -940,7 +950,7 @@ void MainWidget::sendPreparedText(History *hist, const QString &text, MsgId repl
 		App::historyRegRandom(randomId, newId);
 
 		MTPstring msgText(MTP_string(sendingText));
-		int32 flags = (hist->peer->input.type() == mtpc_inputPeerSelf) ? 0 : (MTPDmessage_flag_unread | MTPDmessage_flag_out);
+		int32 flags = newMessageFlags(hist->peer); // unread, out
 		int32 sendFlags = 0;
 		if (replyTo) {
 			flags |= MTPDmessage::flag_reply_to_msg_id;
@@ -953,8 +963,8 @@ void MainWidget::sendPreparedText(History *hist, const QString &text, MsgId repl
 			WebPageData *page = App::webPage(webPageId);
 			media = MTP_messageMediaWebPage(MTP_webPagePending(MTP_long(page->id), MTP_int(page->pendingTill)));
 		}
-		hist->addToBack(MTP_message(MTP_int(flags), MTP_int(newId), MTP_int(MTP::authedId()), App::peerToMTP(hist->peer->id), MTPint(), MTPint(), MTP_int(replyTo), MTP_int(unixtime()), msgText, media));
-		hist->sendRequestId = MTP::send(MTPmessages_SendMessage(MTP_int(sendFlags), hist->peer->input, MTP_int(replyTo), msgText, MTP_long(randomId)), App::main()->rpcDone(&MainWidget::sentDataReceived, randomId), RPCFailHandlerPtr(), 0, 0, hist->sendRequestId);
+		hist->addToBack(MTP_message(MTP_int(flags), MTP_int(newId), MTP_int(MTP::authedId()), App::peerToMTP(hist->peer->id), MTPint(), MTPint(), MTP_int(replyTo), MTP_int(unixtime()), msgText, media, MTPnullMarkup));
+		hist->sendRequestId = MTP::send(MTPmessages_SendMessage(MTP_int(sendFlags), hist->peer->input, MTP_int(replyTo), msgText, MTP_long(randomId), MTPnullMarkup), App::main()->rpcDone(&MainWidget::sentDataReceived, randomId), RPCFailHandlerPtr(), 0, 0, hist->sendRequestId);
 	}
 
 	finishForwarding(hist);
@@ -1010,6 +1020,10 @@ uint64 MainWidget::animActiveTime() const {
 
 void MainWidget::stopAnimActive() {
 	history.stopAnimActive();
+}
+
+void MainWidget::sendBotCommand(const QString &cmd, MsgId replyTo) {
+	history.sendBotCommand(cmd, replyTo);
 }
 
 void MainWidget::searchMessages(const QString &query) {
@@ -1575,7 +1589,7 @@ void MainWidget::serviceNotification(const QString &msg, const MTPMessageMedia &
 	QString sendingText, leftText = msg;
 	HistoryItem *item = 0;
 	while (textSplit(sendingText, leftText, MaxMessageSize)) {
-		item = App::histories().addToBack(MTP_message(MTP_int(flags), MTP_int(clientMsgId()), MTP_int(ServiceUserId), MTP_peerUser(MTP_int(MTP::authedId())), MTPint(), MTPint(), MTPint(), MTP_int(unixtime()), MTP_string(sendingText), media), unread ? 1 : 2);
+		item = App::histories().addToBack(MTP_message(MTP_int(flags), MTP_int(clientMsgId()), MTP_int(ServiceUserId), MTP_peerUser(MTP_int(MTP::authedId())), MTPint(), MTPint(), MTPint(), MTP_int(unixtime()), MTP_string(sendingText), media, MTPnullMarkup), unread ? 1 : 2);
 	}
 	if (item) {
 		history.peerMessagesUpdated(item->history()->peer->id);
@@ -2491,7 +2505,7 @@ void MainWidget::mtpPing() {
 }
 
 void MainWidget::start(const MTPUser &user) {
-	int32 uid = user.c_userSelf().vid.v;
+	int32 uid = user.c_user().vid.v;
 	if (MTP::authedId() != uid) {
 		MTP::authed(uid);
 		Local::writeMtpData();
@@ -2666,7 +2680,7 @@ bool MainWidget::inviteImportFail(const RPCError &error) {
 
 void MainWidget::startFull(const MTPVector<MTPUser> &users) {
 	const QVector<MTPUser> &v(users.c_vector().v);
-	if (v.isEmpty() || v[0].type() != mtpc_userSelf) { // wtf?..
+	if (v.isEmpty() || v[0].type() != mtpc_user || !(v[0].c_user().vflags.v & MTPDuser_flag_self)) { // wtf?..
 		return App::logOut();
 	}
 	start(v[0]);
@@ -3054,7 +3068,7 @@ void MainWidget::handleUpdates(const MTPUpdates &updates) {
 			return;
 		}
 		bool out = (d.vflags.v & MTPDmessage_flag_out);
-		HistoryItem *item = App::histories().addToBack(MTP_message(d.vflags, d.vid, out ? MTP_int(MTP::authedId()) : d.vuser_id, MTP_peerUser(out ? d.vuser_id : MTP_int(MTP::authedId())), d.vfwd_from_id, d.vfwd_date, d.vreply_to_msg_id, d.vdate, d.vmessage, MTP_messageMediaEmpty()));
+		HistoryItem *item = App::histories().addToBack(MTP_message(d.vflags, d.vid, out ? MTP_int(MTP::authedId()) : d.vuser_id, MTP_peerUser(out ? d.vuser_id : MTP_int(MTP::authedId())), d.vfwd_from_id, d.vfwd_date, d.vreply_to_msg_id, d.vdate, d.vmessage, MTP_messageMediaEmpty(), MTPnullMarkup));
 		if (item) {
 			history.peerMessagesUpdated(item->history()->peer->id);
 		}
@@ -3074,7 +3088,7 @@ void MainWidget::handleUpdates(const MTPUpdates &updates) {
 			_byPtsUpdates.insert(ptsKey(SkippedUpdates), updates);
 			return;
 		}
-		HistoryItem *item = App::histories().addToBack(MTP_message(d.vflags, d.vid, d.vfrom_id, MTP_peerChat(d.vchat_id), d.vfwd_from_id, d.vfwd_date, d.vreply_to_msg_id, d.vdate, d.vmessage, MTP_messageMediaEmpty()));
+		HistoryItem *item = App::histories().addToBack(MTP_message(d.vflags, d.vid, d.vfrom_id, MTP_peerChat(d.vchat_id), d.vfwd_from_id, d.vfwd_date, d.vreply_to_msg_id, d.vdate, d.vmessage, MTP_messageMediaEmpty(), MTPnullMarkup));
 		if (item) {
 			history.peerMessagesUpdated(item->history()->peer->id);
 		}
@@ -3219,7 +3233,7 @@ void MainWidget::feedUpdate(const MTPUpdate &update) {
 
 	case mtpc_updateChatParticipants: {
 		const MTPDupdateChatParticipants &d(update.c_updateChatParticipants());
-		App::feedParticipants(d.vparticipants);
+		App::feedParticipants(d.vparticipants, true);
 	} break;
 
 	case mtpc_updateChatParticipantAdd: {

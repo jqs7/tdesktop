@@ -79,6 +79,8 @@ public:
 	void itemRemoved(HistoryItem *item);
 	void itemReplaced(HistoryItem *oldItem, HistoryItem *newItem);
 
+	void updateBotInfo(bool recount = true);
+
 	~HistoryList();
 	
 public slots:
@@ -116,6 +118,12 @@ private:
 	void applyDragSelection();
 
 	History *hist;
+
+	int32 ySkip;
+	BotInfo *botInfo;
+	int32 botDescWidth, botDescHeight;
+	QRect botDescRect;
+
 	HistoryWidget *historyWidget;
 	ScrollArea *scrollArea;
 	int32 currentBlock, currentItem;
@@ -172,6 +180,7 @@ public:
 	void insertFromMimeData(const QMimeData *source);
 
 	void focusInEvent(QFocusEvent *e);
+	void setMaxHeight(int32 maxHeight);
 
 public slots:
 
@@ -185,6 +194,67 @@ signals:
 
 private:
 	HistoryWidget *history;
+	int32 _maxHeight;
+
+};
+
+class BotKeyboard : public QWidget {
+	Q_OBJECT
+
+public:
+
+	BotKeyboard();
+
+	void paintEvent(QPaintEvent *e);
+	void resizeEvent(QResizeEvent *e);
+	void mousePressEvent(QMouseEvent *e);
+	void mouseMoveEvent(QMouseEvent *e);
+	void mouseReleaseEvent(QMouseEvent *e);
+	void leaveEvent(QEvent *e);
+
+	bool updateMarkup(HistoryItem *last);
+	bool hasMarkup() const;
+
+	bool hoverStep(float64 ms);
+	void resizeToWidth(int32 width);
+
+	MsgId forMsgId() const {
+		return _wasForMsgId;
+	}
+
+public slots:
+
+	void showCommandTip();
+	void updateSelected();
+
+private:
+
+	void updateStyle(int32 w = -1);
+	void clearSelection();
+
+	MsgId _wasForMsgId;
+	QTimer _cmdTipTimer;
+
+	QPoint _lastMousePos;
+	struct Button {
+		Button(const QString &str = QString()) : cmd(str), text(1), cwidth(0), hover(0), full(true) {
+		}
+		QRect rect;
+		QString cmd;
+		Text text;
+		int32 cwidth;
+		float64 hover;
+		bool full;
+	};
+	int32 _sel, _down;
+	QList<QList<Button> > _btns;
+
+	typedef QMap<int32, uint64> Animations;
+	Animations _animations;
+	Animation _hoverAnim;
+
+	const style::botKeyboardButton *_st;
+
 };
 
 class HistoryHider : public QWidget, public Animated {
@@ -371,6 +441,8 @@ public:
 	bool recordingStep(float64 ms);
 	void stopRecording(bool send);
 
+	void sendBotCommand(const QString &cmd, MsgId replyTo);
+
 	~HistoryWidget();
 
 signals:
@@ -391,7 +463,7 @@ public slots:
 	void onPreviewTimeout();
 
 	void peerUpdated(PeerData *data);
-	void onPeerLoaded(PeerData *data);
+	void onFullPeerUpdated(PeerData *data);
 
 	void cancelTyping();
 
@@ -414,6 +486,8 @@ public slots:
 	void onDocumentSelect();
 	void onPhotoDrop(QDropEvent *e);
 	void onDocumentDrop(QDropEvent *e);
+
+	void onKbToggle();
 
 	void onPhotoReady();
 	void onSendConfirmed();
@@ -462,7 +536,11 @@ private:
 	int32 _replyToNameVersion;
 	IconedButton _replyForwardPreviewCancel;
 	void updateReplyToName();
-	void drawFieldBackground(QPainter &p);
+
+	void drawField(Painter &p);
+	void drawRecordButton(Painter &p);
+	void drawRecording(Painter &p);
+	void updateField();
 
 	QString _previewLinks;
 	WebPageData *_previewData;
@@ -483,6 +561,8 @@ private:
 	void updateListSize(int32 addToY = 0, bool initial = false, bool loadedDown = false, HistoryItem *resizedItem = 0, bool scrollToIt = false);
 	void addMessagesToFront(const QVector<MTPMessage> &messages);
 	void addMessagesToBack(const QVector<MTPMessage> &messages);
+
+	void updateBotKeyboard();
 
 	void stickersGot(const MTPmessages_AllStickers &stickers);
 	bool stickersFailed(const RPCError &error);
@@ -511,14 +591,14 @@ private:
 	ScrollArea _scroll;
 	HistoryList *_list;
 	History *hist;
-	bool _histInited; // initial updateListSize() called
+	bool _histInited, _histNeedUpdate; // initial updateListSize() called
 
 	IconedButton _toHistoryEnd;
 
 	MentionsDropdown _attachMention;
 
 	FlatButton _send;
-	IconedButton _attachDocument, _attachPhoto, _attachEmoji;
+	IconedButton _attachDocument, _attachPhoto, _attachEmoji, _kbShow, _kbHide;
 	MessageField _field;
 	Animation _recordAnim, _recordingAnim;
 	bool _recording, _inRecord, _inField;
@@ -527,6 +607,11 @@ private:
 	anim::fvalue a_recordOver, a_recordDown;
 	anim::cvalue a_recordCancel;
 	int32 _recordCancelWidth;
+
+	bool _kbShown, _kbWasHidden;
+	HistoryItem *_kbReplyTo;
+	ScrollArea _kbScroll;
+	BotKeyboard _keyboard;
 
 	Dropdown _attachType;
 	EmojiPan _emojiPan;
