@@ -540,19 +540,29 @@ namespace App {
 					}
 				}
 				if (!chat->participants.isEmpty()) {
+					History *h = App::historyLoaded(chat->id);
+					bool found = !h || !h->lastKeyboardFrom;
 					int32 botStatus = -1;
 					for (ChatData::Participants::iterator i = chat->participants.begin(), e = chat->participants.end(); i != e;) {
 						if (i.value() < pversion) {
 							i = chat->participants.erase(i);
 						} else {
 							if (i.key()->botInfo) {
-								botStatus = (botStatus > 0 || i.key()->botInfo->readsAllHistory) ? 2 : 1;
+								botStatus = (botStatus > 0/* || i.key()->botInfo->readsAllHistory*/) ? 2 : 1;
 								if (requestBotInfos && !i.key()->botInfo->inited) App::api()->requestFullPeer(i.key());
+							}
+							if (!found && i.key()->id == h->lastKeyboardFrom) {
+								found = true;
 							}
 							++i;
 						}
 					}
 					chat->botStatus = botStatus;
+					if (!found) {
+						h->lastKeyboardId = 0;
+						h->lastKeyboardFrom = 0;
+						if (App::main()) App::main()->updateBotKeyboard();
+					}
 				}
 				if (App::main()) App::main()->peerUpdated(chat);
 			}
@@ -578,7 +588,7 @@ namespace App {
 					}
 					chat->count++;
 					if (user->botInfo) {
-						chat->botStatus = (chat->botStatus > 0 || !user->botInfo->readsAllHistory) ? 2 : 1;
+						chat->botStatus = (chat->botStatus > 0/* || !user->botInfo->readsAllHistory*/) ? 2 : 1;
 						if (!user->botInfo->inited) App::api()->requestFullPeer(user);
 					}
 				}
@@ -604,12 +614,19 @@ namespace App {
 					if (i != chat->participants.end()) {
 						chat->participants.erase(i);
 						chat->count--;
+
+						History *h = App::historyLoaded(chat->id);
+						if (h && h->lastKeyboardFrom == user->id) {
+							h->lastKeyboardId = 0;
+							h->lastKeyboardFrom = 0;
+							if (App::main()) App::main()->updateBotKeyboard();
+						}
 					}
 					if (chat->botStatus > 0 && user->botInfo) {
 						int32 botStatus = -1;
 						for (ChatData::Participants::const_iterator j = chat->participants.cbegin(), e = chat->participants.cend(); j != e; ++j) {
 							if (j.key()->botInfo) {
-								if (botStatus > 0 || !j.key()->botInfo->readsAllHistory) {
+								if (botStatus > 0/* || !j.key()->botInfo->readsAllHistory*/) {
 									botStatus = 2;
 									break;
 								}
@@ -1977,12 +1994,15 @@ namespace App {
 
 	void feedReplyMarkup(MsgId msgId, const MTPReplyMarkup &markup) {
 		ReplyMarkup data;
+		ReplyMarkup::Commands &commands(data.commands);
 		switch (markup.type()) {
 		case mtpc_replyKeyboardMarkup: {
 			const MTPDreplyKeyboardMarkup &d(markup.c_replyKeyboardMarkup());
+			data.flags = d.vflags.v;
+
 			const QVector<MTPKeyboardButtonRow> &v(d.vrows.c_vector().v);
 			if (!v.isEmpty()) {
-				data.reserve(v.size());
+				commands.reserve(v.size());
 				for (int32 i = 0, l = v.size(); i < l; ++i) {
 					switch (v.at(i).type()) {
 					case mtpc_keyboardButtonRow: {
@@ -1998,12 +2018,12 @@ namespace App {
 								} break;
 								}
 							}
-							if (!btns.isEmpty()) data.push_back(btns);
+							if (!btns.isEmpty()) commands.push_back(btns);
 						}
 					} break;
 					}
 				}
-				if (!data.isEmpty()) {
+				if (!commands.isEmpty()) {
 					replyMarkups.insert(msgId, data);
 				}
 			}
@@ -2016,7 +2036,7 @@ namespace App {
 	}
 
 	const ReplyMarkup &replyMarkup(MsgId msgId) {
-		static ReplyMarkup zeroMarkup;
+		static ReplyMarkup zeroMarkup(MTPDreplyKeyboardMarkup_flag_ZERO);
 		ReplyMarkups::const_iterator i = replyMarkups.constFind(msgId);
         if (i == replyMarkups.cend()) return zeroMarkup;
 		return i.value();
@@ -2046,15 +2066,21 @@ namespace App {
 		}
 	}
 
+	void insertBotCommand(const QString &cmd) {
+		if (App::main()) {
+			App::main()->insertBotCommand(cmd);
+		}
+	}
+
 	void searchByHashtag(const QString &tag) {
 		if (App::main()) {
 			App::main()->searchMessages(tag + ' ');
 		}
 	}
 
-	void openUserByName(const QString &username, bool toProfile, const QString &start, const QString &startToken) {
+	void openUserByName(const QString &username, bool toProfile, const QString &startToken) {
 		if (App::main()) {
-			App::main()->openUserByName(username, toProfile, start, startToken);
+			App::main()->openUserByName(username, toProfile, startToken);
 		}
 	}
 
