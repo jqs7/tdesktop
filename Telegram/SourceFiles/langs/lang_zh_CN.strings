@@ -69,6 +69,9 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_reconnecting_try_now" = "立即使用";
 
 "lng_status_service_notifications" = "服务通知";
+"lng_status_bot" = "机器人";
+"lng_status_bot_reads_all" = "所有消息可见";
+"lng_status_bot_not_reads_all" = "所有消息不可见";
 "lng_status_offline" = "最后上线很久以前";
 "lng_status_recently" = "近期最后上线";
 "lng_status_last_week" = "最后上线一周内";
@@ -333,7 +336,10 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 
 "lng_profile_chat_unaccessible" = "群组不可访问";
 "lng_topbar_info" = "信息";
+"lng_profile_about_section" = "关于";
 "lng_profile_settings_section" = "设置";
+"lng_profile_bot_settings" = "设置";
+"lng_profile_bot_help" = "帮助";
 "lng_profile_participants_section" = "成员";
 "lng_profile_info" = "联系信息";
 "lng_profile_group_info" = "群组信息";
@@ -343,6 +349,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_profile_clear_history" = "清除历史记录";
 "lng_profile_send_message" = "发送消息";
 "lng_profile_share_contact" = "分享联系人";
+"lng_profile_invite_to_group" = "添加到群组";
 "lng_profile_delete_contact" = "删除";
 "lng_profile_set_group_photo" = "设置照片";
 "lng_profile_add_participant" = "添加成员";
@@ -455,6 +462,14 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_willbe_history" = "Please select chat to start messaging";
 "lng_message_with_from" = "[c]{from}:[/c] {message}";
 "lng_from_you" = "你";
+"lng_bot_description" = "这个机器人能做什么?";
+
+"lng_bot_start" = "启用";
+"lng_bot_choose_group" = "选择群组";
+"lng_bot_no_groups" = "你没有群组";
+"lng_bot_groups_not_found" = "没找到群组";
+"lng_bot_sure_invite" = "添加机器人到«{group}»吗?";
+"lng_bot_already_in_group" = "这个机器人已经是这个群组的成员。";
 
 "lng_typing" = "正在输入";
 "lng_user_typing" = "{user} 正在输入";
@@ -493,6 +508,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 "lng_context_open_audio" = "打开音频";
 "lng_context_save_audio" = "音频另存为..";
 "lng_context_pack_info" = "贴图包信息";
+"lng_context_pack_add" = "添加贴图";
 "lng_context_open_file" = "打开文件";
 "lng_context_save_file" = "文件另存为..";
 "lng_context_forward_file" = "转发文件";
@@ -585,7 +601,7 @@ Copyright (c) 2014 John Preston, https://desktop.telegram.org
 
 "lng_new_version_wrap" = "Telegram Desktop 已更新到版本 {version}\n\n{changes}\n\n完整的更新日志：\n{link}";
 "lng_new_version_minor" = "- 错误修复和其他小的改进";
-"lng_new_version_text" = "— Stickers面板优化\n— bug修复与细节改进";
+"lng_new_version_text" = "这个新版本为聊天机器人了添加新的API，对每个人都是开放的。如果你是个设计师，你可以创建用于游戏或者服务的机器人。在 {blog_link} 查看更多信息。";
 
 "lng_menu_insert_unicode" = "插入Unicode控制字符";
 
