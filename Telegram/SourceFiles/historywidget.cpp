@@ -491,7 +491,9 @@ void HistoryList::dragActionCancel() {
 	historyWidget->noSelectingScroll();
 }
 
-void HistoryList::dragExec() {
+void HistoryList::onDragExec() {
+	if (_dragAction != Dragging) return;
+
 	bool uponSelected = false;
 	if (_dragItem) {
 		bool afterDragSymbol;
@@ -522,7 +524,7 @@ void HistoryList::dragExec() {
 	} else if (textlnkDown()) {
 		sel = textlnkDown()->encoded();
 		if (!sel.isEmpty() && sel.at(0) != '/' && sel.at(0) != '@' && sel.at(0) != '#') {
-			urls.push_back(QUrl::fromEncoded(sel.toUtf8()));
+//			urls.push_back(QUrl::fromEncoded(sel.toUtf8())); // Google Chrome crashes in Mac OS X O_o
 		}
 	}
 	if (!sel.isEmpty()) {
@@ -538,7 +540,7 @@ void HistoryList::dragExec() {
 			mimeData->setData(qsl("application/x-td-forward-selected"), "1");
 		}
 		drag->setMimeData(mimeData);
-		drag->exec();
+		drag->exec(Qt::CopyAction);
 		return;
 	} else {
 		HistoryItem *pressedLnkItem = App::pressedLinkItem(), *pressedItem = App::pressedItem();
@@ -1168,6 +1170,7 @@ void HistoryList::leaveEvent(QEvent *e) {
 
 HistoryList::~HistoryList() {
 	delete _menu;
+	_dragAction = NoDrag;
 }
 
 void HistoryList::adjustCurrent(int32 y) {
@@ -1364,7 +1367,7 @@ void HistoryList::onUpdateSelected() {
 		if (item != _dragItem || (m - _dragStartPos).manhattanLength() >= QApplication::startDragDistance()) {
 			if (_dragAction == PrepareDrag) {
 				_dragAction = Dragging;
-				dragExec();
+				QTimer::singleShot(1, this, SLOT(onDragExec()));
 			} else if (_dragAction == PrepareSelect) {
 				_dragAction = Selecting;
 			}

@@ -489,7 +489,9 @@ void OverviewInner::dragActionFinish(const QPoint &screenPos, Qt::MouseButton bu
 	_overview->updateTopBarSelection();
 }
 
-void OverviewInner::dragExec() {
+void OverviewInner::onDragExec() {
+	if (_dragAction != Dragging) return;
+
 	bool uponSelected = false;
 	if (_dragItem) {
 		bool afterDragSymbol;
@@ -508,7 +510,7 @@ void OverviewInner::dragExec() {
 	} else if (textlnkDown()) {
 		sel = textlnkDown()->encoded();
 		if (!sel.isEmpty() && sel.at(0) != '/' && sel.at(0) != '@' && sel.at(0) != '#') {
-			urls.push_back(QUrl::fromEncoded(sel.toUtf8()));
+//			urls.push_back(QUrl::fromEncoded(sel.toUtf8())); // Google Chrome crashes in Mac OS X O_o
 		}
 	}
 	if (!sel.isEmpty() || forwardSelected) {
@@ -524,7 +526,7 @@ void OverviewInner::dragExec() {
 			mimeData->setData(qsl("application/x-td-forward-selected"), "1");
 		}
 		drag->setMimeData(mimeData);
-		drag->exec();
+		drag->exec(Qt::CopyAction);
 		return;
 	} else {
 		HistoryItem *pressedLnkItem = App::pressedLinkItem(), *pressedItem = App::pressedItem();
@@ -939,7 +941,7 @@ void OverviewInner::onUpdateSelected() {
 		if (_mousedItem != _dragItem || (m - _dragStartPos).manhattanLength() >= QApplication::startDragDistance()) {
 			if (_dragAction == PrepareDrag) {
 				_dragAction = Dragging;
-				dragExec();
+				QTimer::singleShot(1, this, SLOT(onDragExec()));
 			} else if (_dragAction == PrepareSelect) {
 				_dragAction = Selecting;
 			}
@@ -1634,6 +1636,7 @@ void OverviewInner::showAll(bool recountHeights) {
 }
 
 OverviewInner::~OverviewInner() {
+	_dragAction = NoDrag;
 }
 
 OverviewWidget::OverviewWidget(QWidget *parent, const PeerData *peer, MediaOverviewType type) : QWidget(parent)
