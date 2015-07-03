@@ -106,6 +106,7 @@ enum MediaOverviewType {
 	OverviewVideos,
 	OverviewDocuments,
 	OverviewAudios,
+	OverviewAudioDocuments,
 
 	OverviewCount
 };
@@ -127,6 +128,7 @@ inline MTPMessagesFilter typeToMediaFilter(MediaOverviewType &type) {
 	case OverviewVideos: return MTP_inputMessagesFilterVideo();
 	case OverviewDocuments: return MTP_inputMessagesFilterDocument();
 	case OverviewAudios: return MTP_inputMessagesFilterAudio();
+	case OverviewAudioDocuments: return MTP_inputMessagesFilterAudioDocuments();
 	default: type = OverviewCount; break;
 	}
 	return MTPMessagesFilter();
@@ -285,6 +287,8 @@ struct History : public QList<HistoryBlock*> {
 	MediaOverview _overview[OverviewCount];
 	MediaOverviewIds _overviewIds[OverviewCount];
 	int32 _overviewCount[OverviewCount]; // -1 - not loaded, 0 - all loaded, > 0 - count, but not all loaded
+
+	void eraseFromOverview(MediaOverviewType type, MsgId msgId);
 
 	static const int32 ScrollMax = INT_MAX;
 };
@@ -1041,6 +1045,9 @@ public:
 		return !data->thumb->isNull();
 	}
 	ImagePtr replyPreview();
+
+	void drawInPlaylist(QPainter &p, const HistoryItem *parent, bool selected, bool over, int32 width) const;
+	TextLinkPtr linkInPlaylist();
 
 private:
 
