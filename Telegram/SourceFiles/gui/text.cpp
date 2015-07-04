@@ -1614,27 +1614,36 @@ public:
 		}
 	}
 
+	style::font applyFlags(int32 flags, const style::font &f) {
+		style::font result = f;
+		if (flags & TextBlockBold) result = result->bold();
+		if (flags & TextBlockItalic) result = result->italic();
+		if (flags & TextBlockUnderline) result = result->underline();
+		return result;
+	}
+
 	void eSetFont(ITextBlock *block) {
 		style::font newFont = _t->_font;
 		int flags = block->flags();
+		if (flags) {
+			newFont = applyFlags(flags, _t->_font);
+		}
 		if (block->lnkIndex()) {
 			const TextLinkPtr &l(_t->_links.at(block->lnkIndex() - 1));
 			if (l == _overLnk) {
 				if (l == _downLnk || !_downLnk) {
-					newFont = _textStyle->lnkOverFlags;
+					if (_t->_font != _textStyle->lnkOverFlags) newFont = _textStyle->lnkOverFlags;
 				} else {
-					newFont = _textStyle->lnkFlags;
+					if (_t->_font != _textStyle->lnkFlags) newFont = _textStyle->lnkFlags;
 				}
 			} else {
-				newFont = _textStyle->lnkFlags;
+				if (_t->_font != _textStyle->lnkFlags) newFont = _textStyle->lnkFlags;
 			}
-		} else {
-			flags = block->flags();
-			if (flags & TextBlockBold) newFont = newFont->bold();
-			if (flags & TextBlockItalic) newFont = newFont->italic();
-			if (flags & TextBlockUnderline) newFont = newFont->underline();
 		}
 		if (newFont != _f) {
+			if (newFont->family() == _t->_font->family()) {
+				newFont = applyFlags(flags | newFont->flags(), _t->_font);
+			}
 			_f = newFont;
 			_e->fnt = _f->f;
 			_e->resetFontEngineCache();
